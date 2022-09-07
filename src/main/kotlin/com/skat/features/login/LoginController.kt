@@ -9,9 +9,9 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import java.util.*
 
-class LoginController(private val call: ApplicationCall) {
+object LoginController {
 
-    suspend fun performLogin() {
+    suspend fun performLogin(call: ApplicationCall) {
         val receive = call.receive(LoginReceiveModel::class)
 
         val userDTO = Users.fetch(login = receive.login)
@@ -30,7 +30,7 @@ class LoginController(private val call: ApplicationCall) {
         }
     }
 
-    suspend fun performToken() {
+    suspend fun performToken(call: ApplicationCall) {
         val receive = call.receive(TokenModel::class)
 
         val tokenDTO = Tokens.fetchLogin(receive.token)
@@ -40,5 +40,4 @@ class LoginController(private val call: ApplicationCall) {
             call.respond(HttpStatusCode.OK, "Token found")
         }
     }
-
 }
