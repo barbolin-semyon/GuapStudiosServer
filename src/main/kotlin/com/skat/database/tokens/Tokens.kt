@@ -1,4 +1,4 @@
-package com.skat.database.users.tokens
+package com.skat.database.tokens
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert

@@ -1,4 +1,4 @@
-package com.skat.database.users.tokens
+package com.skat.database.tokens
 
 class TokenDTO(
     val login: String,
