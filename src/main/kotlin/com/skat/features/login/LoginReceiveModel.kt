@@ -7,3 +7,8 @@ data class LoginReceiveModel(
     val login: String,
     val password: String
 )
+
+@Serializable
+data class TokenModel(
+    val token: String
+)
