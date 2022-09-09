@@ -1,5 +1,6 @@
 package com.skat
 
+import com.skat.features.authorization.AuthorizationRooting
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.skat.plugins.*
@@ -12,6 +13,6 @@ fun main() {
 
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
         configureSerialization()
-        configureRouting()
+        AuthorizationRooting()
     }.start(wait = true)
 }

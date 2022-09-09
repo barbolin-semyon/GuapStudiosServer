@@ -1,10 +1,10 @@
-package com.skat.features.register
+package com.skat.features.authorization.register
 
 import com.skat.database.tokens.TokenDTO
 import com.skat.database.tokens.Tokens
 import com.skat.database.users.UserDTO
 import com.skat.database.users.Users
-import com.skat.features.login.TokenModel
+import com.skat.features.authorization.login.TokenModel
 import com.skat.utils.emailIsValid
 import io.ktor.http.*
 import io.ktor.server.application.*

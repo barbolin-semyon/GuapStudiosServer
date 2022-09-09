@@ -1,4 +1,4 @@
-package com.skat.features.login
+package com.skat.features.authorization.login
 
 import kotlinx.serialization.Serializable
 
