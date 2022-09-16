@@ -12,7 +12,7 @@ fun Application.AuthorizationRooting() {
             return@post
         }
 
-        post("/checkToken") {
+        post("/token") {
             LoginController.performToken(call)
             return@post
         }

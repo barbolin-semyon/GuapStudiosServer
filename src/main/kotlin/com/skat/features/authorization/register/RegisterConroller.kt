@@ -24,7 +24,7 @@ object RegisterController {
         val userDTO = Users.fetch(receive.login)
 
         if (userDTO != null) {
-            call.respond(HttpStatusCode.BadRequest, "user ")
+            call.respond(HttpStatusCode.BadRequest, "login busy")
         } else {
             val token = UUID.randomUUID().toString()
 

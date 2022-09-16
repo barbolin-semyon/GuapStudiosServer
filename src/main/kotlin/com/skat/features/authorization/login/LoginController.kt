@@ -2,6 +2,7 @@ package com.skat.features.authorization.login
 
 import com.skat.database.tokens.TokenDTO
 import com.skat.database.tokens.Tokens
+import com.skat.database.users.UserDTO
 import com.skat.database.users.Users
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -10,13 +11,12 @@ import io.ktor.server.response.*
 import java.util.*
 
 object LoginController {
-
     suspend fun performLogin(call: ApplicationCall) {
         val receive = call.receive(LoginReceiveModel::class)
 
         val userDTO = Users.fetch(login = receive.login)
 
-        if (userDTO == null ){
+        if (userDTO == null ) {
             call.respond(HttpStatusCode.BadRequest, "Not found user")
         } else {
             if (userDTO.password == receive.password) {
@@ -37,7 +37,19 @@ object LoginController {
         if (tokenDTO == null) {
             call.respond(HttpStatusCode.BadRequest, "Not found token")
         } else {
-            call.respond(HttpStatusCode.OK, "Token found")
+            val userDTO = Users.fetch(tokenDTO.login)
+
+            call.respond(HttpStatusCode.OK, userDTO!!.hidePassword())
         }
+    }
+    private fun UserDTO.hidePassword(): UserModel{
+        return UserModel(
+            login = this.login,
+            email = this.email,
+            username = this.username,
+            isAdmin = this.isAdmin,
+            typeStudio = this.typeStudio,
+            score = this.score,
+        )
     }
 }
