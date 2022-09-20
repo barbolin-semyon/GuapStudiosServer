@@ -10,5 +10,5 @@ data class RegisterReceiveRemote(
     val email: String,
     val username: String,
     val typeStudio: String,
-    val score: Int,
+    val isAdmin: Boolean
 )

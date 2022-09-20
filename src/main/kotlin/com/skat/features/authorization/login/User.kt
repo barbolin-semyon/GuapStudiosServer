@@ -1,5 +1,6 @@
 package com.skat.features.authorization.login
 
+@kotlinx.serialization.Serializable
 data class UserModel(
     val login: String,
     val email: String,

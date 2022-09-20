@@ -35,9 +35,9 @@ object RegisterController {
                         password = receive.password,
                         username = receive.username,
                         email = receive.email,
-                        isAdmin = false,
-                        score = receive.score,
+                        isAdmin = receive.isAdmin,
                         typeStudio = receive.typeStudio,
+                        score = 0
                     )
                 )
             }catch (e: ExposedSQLException) {
