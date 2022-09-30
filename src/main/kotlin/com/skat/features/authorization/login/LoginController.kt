@@ -16,7 +16,7 @@ object LoginController {
 
         val userDTO = Users.fetch(login = receive.login)
 
-        if (userDTO == null ) {
+        if (userDTO == null) {
             call.respond(HttpStatusCode.BadRequest, "Not found user")
         } else {
             if (userDTO.password == receive.password) {
@@ -31,18 +31,24 @@ object LoginController {
     }
 
     suspend fun performToken(call: ApplicationCall) {
-        val receive = call.receive(TokenModel::class)
+        val token = call.parameters["token"]
 
-        val tokenDTO = Tokens.fetchLogin(receive.token)
-        if (tokenDTO == null) {
-            call.respond(HttpStatusCode.BadRequest, "Not found token")
+        if (token == null) {
+            call.respond(HttpStatusCode.BadRequest, "There isn't parameter token")
         } else {
-            val userDTO = Users.fetch(tokenDTO.login)
 
-            call.respond(HttpStatusCode.OK, userDTO!!.hidePassword())
+            val tokenDTO = Tokens.fetchLogin(token)
+            if (tokenDTO == null) {
+                call.respond(HttpStatusCode.BadRequest, "Not found token")
+            } else {
+                val userDTO = Users.fetch(tokenDTO.login)
+
+                call.respond(HttpStatusCode.OK, userDTO!!.hidePassword())
+            }
         }
     }
-    private fun UserDTO.hidePassword(): UserModel{
+
+    private fun UserDTO.hidePassword(): UserModel {
         return UserModel(
             login = this.login,
             email = this.email,
