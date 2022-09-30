@@ -5,10 +5,10 @@ import java.util.UUID
 
 @kotlinx.serialization.Serializable
 class ProjectDTO(
-    val adminId: String,
-    val id: String = UUID.randomUUID().toString(),
-    val title: String,
-    val description: String,
+    val adminId: String? = null,
+    val id: String,
+    val title: String? = null,
+    val description: String? = null,
     val tasks: Array<String> = arrayOf(),
     val events: Array<String> = arrayOf(),
     val users: Array<String> = arrayOf(),

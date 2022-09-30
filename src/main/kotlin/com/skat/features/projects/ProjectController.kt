@@ -6,22 +6,30 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
+import java.util.*
 
 object ProjectController {
 
     suspend fun addProject(call: ApplicationCall) {
         val receiveModel = call.receive(ProjectReceiveModel::class)
+        val id = UUID.randomUUID().toString()
 
         Projects.insert(
+
+
             ProjectDTO(
+                id = id,
                 adminId = receiveModel.adminId,
                 title = receiveModel.title,
                 description = receiveModel.description,
             )
         )
-        call.respond(HttpStatusCode.OK, "OK")
+        call.respond(HttpStatusCode.OK, id)
+    }
 
-
+    suspend fun updateProject(call: ApplicationCall) {
+        val receiveModel = call.receive(ProjectDTO::class)
+        Projects.updateProject(receiveModel)
     }
 
     suspend fun fetchProject(call: ApplicationCall) {

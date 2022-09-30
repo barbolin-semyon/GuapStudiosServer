@@ -17,12 +17,41 @@ object Projects : Table("project") {
         transaction {
             Projects.insert {
                 it[id] = projectDTO.id
-                it[adminId] = projectDTO.adminId
-                it[title] = projectDTO.title
-                it[description] = projectDTO.description
+                it[adminId] = projectDTO.adminId!!
+                it[title] = projectDTO.title!!
+                it[description] = projectDTO.description!!
                 it[tasks] = projectDTO.tasks
                 it[users] = projectDTO.users
                 it[events] = projectDTO.events
+            }
+        }
+    }
+    fun updateProject(projectDTO: ProjectDTO) {
+        transaction {
+            Projects.update {
+                if (projectDTO.adminId != null) {
+                    it[adminId] = projectDTO.adminId
+                }
+
+                if (projectDTO.title != null) {
+                    it[title] = projectDTO.title
+                }
+
+                if (projectDTO.description != null) {
+                    it[description] = projectDTO.description
+                }
+
+                if (projectDTO.tasks.isNotEmpty()) {
+                    it[tasks] = projectDTO.tasks
+                }
+
+                if (projectDTO.users.isNotEmpty()) {
+                    it[users] = projectDTO.users
+                }
+
+                if (projectDTO.events.isNotEmpty()) {
+                    it[events] = projectDTO.events
+                }
             }
         }
     }
