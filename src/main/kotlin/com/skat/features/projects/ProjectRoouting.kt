@@ -14,5 +14,10 @@ fun Application.ProjectRouting() {
             ProjectController.fetchProject(call)
             return@get
         }
+
+        post("project/update") {
+            ProjectController.updateProject(call)
+            return@post
+        }
     }
 }
