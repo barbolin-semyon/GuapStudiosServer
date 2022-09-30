@@ -32,6 +32,17 @@ object ProjectController {
         Projects.updateProject(receiveModel)
     }
 
+    suspend fun deleteProject(call: ApplicationCall) {
+        val id = call.parameters["id"]
+
+        if (id == null) {
+            call.respond(HttpStatusCode.BadRequest, "there isn't parameter id")
+        } else {
+            Projects.deleteProject(id)
+            call.respond(HttpStatusCode.OK, "OK")
+        }
+    }
+
     suspend fun fetchProject(call: ApplicationCall) {
         val id = call.parameters["id"]
 

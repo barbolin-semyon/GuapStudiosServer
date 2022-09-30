@@ -21,5 +21,10 @@ fun Application.ProjectRouting() {
             ProjectController.updateProject(call)
             return@post
         }
+
+        get("/project/delete") {
+            ProjectController.deleteProject(call)
+            return@get
+        }
     }
 }

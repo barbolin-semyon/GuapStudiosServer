@@ -56,6 +56,13 @@ object Projects : Table("project") {
         }
     }
 
+    fun deleteProject(id: String) {
+        transaction {
+            Projects.deleteWhere {
+                Projects.id.eq(id)
+            }
+        }
+    }
     fun fetchProject(id: String): ProjectDTO? {
         return try {
             transaction {
