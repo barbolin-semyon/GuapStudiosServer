@@ -1,0 +1,10 @@
+package com.skat.database.tasks
+class TaskDTO(
+    val id: String,
+    val title: String,
+    val description: String,
+    val isCheck: Boolean,
+    val user: String,
+    val color: String,
+    val mark: String
+)
