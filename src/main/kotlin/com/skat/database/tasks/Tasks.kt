@@ -3,11 +3,8 @@ package com.skat.database.tasks
 import array
 import com.skat.database.projects.ProjectDTO
 import com.skat.database.projects.Projects
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.VarCharColumnType
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object Tasks : Table("tasks") {
@@ -33,7 +30,28 @@ object Tasks : Table("tasks") {
         }
     }
 
-    fun deleteProject(id: String) {
+    fun fetch(id: String): TaskDTO? {
+        return try {
+            transaction {
+                val model = Tasks.select { Tasks.id.eq(id) }.single()
+
+
+                TaskDTO(
+                    id = model[Tasks.id],
+                    title = model[title],
+                    description = model[description],
+                    user = model[user],
+                    isCheck = model[isCheck],
+                    color = model[color],
+                    mark = model[mark]
+                )
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    fun delete(id: String) {
         transaction {
             Tasks.deleteWhere {
                 Tasks.id.eq(id)
