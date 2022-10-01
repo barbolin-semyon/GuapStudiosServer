@@ -8,3 +8,14 @@ data class ProjectReceiveModel(
     val title: String,
     val description: String,
 )
+
+@Serializable
+data class ProjectUpdateReceiveModel(
+    val id: String,
+    val adminId: String? = null,
+    val title: String? = null,
+    val description: String? = null,
+    val tasks: Array<String>? = null,
+    val events: Array<String>? = null,
+    val users: Array<String>? = null,
+)

@@ -24,11 +24,15 @@ object ProjectController {
                 description = receiveModel.description,
             )
         )
-        call.respond(HttpStatusCode.OK, id)
+
+        val project = Projects.fetchProject(id)
+        if (project != null) { call.respond(HttpStatusCode.OK, id)}
     }
 
-    suspend fun updateProject(call: ApplicationCall) {
-        val receiveModel = call.receive(ProjectDTO::class)
+    suspend fun updateProject(
+        call: ApplicationCall
+    ) {
+        val receiveModel = call.receive(ProjectUpdateReceiveModel::class)
         Projects.updateProject(receiveModel)
     }
 

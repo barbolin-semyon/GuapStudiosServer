@@ -1,5 +1,6 @@
 package com.skat.database.users
 
+@kotlinx.serialization.Serializable
 class UserDTO(
     val login: String,
     val password: String,

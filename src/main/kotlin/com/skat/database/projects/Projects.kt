@@ -1,6 +1,8 @@
 package com.skat.database.projects
 
 import array
+import com.skat.database.users.UserDTO
+import com.skat.features.projects.ProjectUpdateReceiveModel
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -26,31 +28,33 @@ object Projects : Table("project") {
             }
         }
     }
-    fun updateProject(projectDTO: ProjectDTO) {
+    fun updateProject(
+        projectUpdateReceiveModel: ProjectUpdateReceiveModel
+    ) {
         transaction {
             Projects.update {
-                if (projectDTO.adminId != null) {
-                    it[adminId] = projectDTO.adminId
+                if (projectUpdateReceiveModel.adminId != null) {
+                    it[adminId] = projectUpdateReceiveModel.adminId
                 }
 
-                if (projectDTO.title != null) {
-                    it[title] = projectDTO.title
+                if (projectUpdateReceiveModel.title != null) {
+                    it[title] = projectUpdateReceiveModel.title
                 }
 
-                if (projectDTO.description != null) {
-                    it[description] = projectDTO.description
+                if (projectUpdateReceiveModel.description != null) {
+                    it[description] = projectUpdateReceiveModel.description
                 }
 
-                if (projectDTO.tasks.isNotEmpty()) {
-                    it[tasks] = projectDTO.tasks
+                if (projectUpdateReceiveModel.tasks != null) {
+                    it[tasks] = projectUpdateReceiveModel.tasks
                 }
 
-                if (projectDTO.users.isNotEmpty()) {
-                    it[users] = projectDTO.users
+                if (projectUpdateReceiveModel.users != null) {
+                    it[users] = projectUpdateReceiveModel.users
                 }
 
-                if (projectDTO.events.isNotEmpty()) {
-                    it[events] = projectDTO.events
+                if (projectUpdateReceiveModel.events != null) {
+                    it[events] = projectUpdateReceiveModel.events
                 }
             }
         }
