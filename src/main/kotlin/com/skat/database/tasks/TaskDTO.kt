@@ -1,4 +1,6 @@
 package com.skat.database.tasks
+
+@kotlinx.serialization.Serializable
 class TaskDTO(
     val id: String,
     val title: String,
