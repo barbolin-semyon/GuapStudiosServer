@@ -20,6 +20,12 @@ data class DeleteTaskReceiveModel(
 )
 
 @kotlinx.serialization.Serializable
+data class UpdateTaskReceiveModel(
+    val id: String?,
+    val isCheck: Boolean?
+)
+
+@kotlinx.serialization.Serializable
 data class ListTaskResponceModel(
     val tasks: List<TaskDTO>,
     val failTasksIndex: List<String>

@@ -81,4 +81,18 @@ object TaskController {
 
     }
 
+    suspend fun updateIsCheck(call: ApplicationCall) {
+        val receive = call.receive(UpdateTaskReceiveModel::class)
+
+        receive.apply {
+            if (id != null && isCheck != null) {
+                Tasks.updateIsCheck(id, isCheck)
+                call.respond(HttpStatusCode.OK, "OK")
+            } else {
+                call.respond(HttpStatusCode.BadRequest, "Not found id or isCheck")
+            }
+        }
+
+    }
+
 }
