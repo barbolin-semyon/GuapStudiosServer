@@ -32,7 +32,7 @@ object Projects : Table("project") {
         projectUpdateReceiveModel: ProjectUpdateReceiveModel
     ) {
         transaction {
-            Projects.update {
+            Projects.update({ Projects.id.eq(projectUpdateReceiveModel.id) }) {
                 if (projectUpdateReceiveModel.adminId != null) {
                     it[adminId] = projectUpdateReceiveModel.adminId
                 }
