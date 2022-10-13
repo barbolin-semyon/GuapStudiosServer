@@ -30,6 +30,13 @@ object Tasks : Table("tasks") {
         }
     }
 
+    fun updateIsCheck(id: String, newIsCheck: Boolean) {
+        transaction {
+            Projects.update({Tasks.id.eq(id)}) {
+                it[isCheck] = newIsCheck
+            }
+        }
+    }
     fun fetch(id: String): TaskDTO? {
         return try {
             transaction {
