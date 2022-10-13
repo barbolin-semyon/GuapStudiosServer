@@ -23,7 +23,7 @@ object Studious : Table("studious") {
         }
     }
 
-    fun updateProject(
+    fun updateStudio(
         updateModel: StudioUpdateReceiveModel,
     ) {
         transaction {
