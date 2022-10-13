@@ -68,6 +68,7 @@ object TaskController {
             val tasks = project.tasks.toMutableList()
             tasks.remove(receive.taskId)
 
+            Tasks.delete(receive.taskId)
             Projects.updateProject(
                 ProjectUpdateReceiveModel(
                     id = receive.projectId,
