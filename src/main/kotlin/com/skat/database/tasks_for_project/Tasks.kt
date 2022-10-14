@@ -15,7 +15,7 @@ object Tasks : Table("tasks") {
 
     fun insert(tasks: TaskDTO) {
         transaction {
-            Projects.insert {
+            Tasks.insert {
                 it[Tasks.id] = tasks.id
                 it[title] = tasks.title
                 it[description] = tasks.description
@@ -29,7 +29,7 @@ object Tasks : Table("tasks") {
 
     fun updateIsCheck(id: String, newIsCheck: Boolean) {
         transaction {
-            Projects.update({Tasks.id.eq(id)}) {
+            Tasks.update({Tasks.id.eq(id)}) {
                 it[isCheck] = newIsCheck
             }
         }
