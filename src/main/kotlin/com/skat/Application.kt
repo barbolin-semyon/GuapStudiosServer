@@ -3,6 +3,7 @@ package com.skat
 import com.skat.features.authorization.AuthorizationRooting
 import com.skat.features.projects.ProjectRouting
 import com.skat.features.projects.events.EventRouting
+import com.skat.features.projects.tasks.TaskRooting
 import com.skat.features.studious.StudiousRouting
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -19,6 +20,7 @@ fun main() {
         AuthorizationRooting()
         ProjectRouting()
         StudiousRouting()
+        TaskRooting()
         EventRouting()
     }.start(wait = true)
 }
