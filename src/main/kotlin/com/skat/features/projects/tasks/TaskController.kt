@@ -1,8 +1,8 @@
 package com.skat.features.projects.tasks
 
 import com.skat.database.projects.Projects
-import com.skat.database.tasks.TaskDTO
-import com.skat.database.tasks.Tasks
+import com.skat.database.tasks_for_project.TaskDTO
+import com.skat.database.tasks_for_project.Tasks
 import com.skat.features.projects.ProjectUpdateReceiveModel
 import io.ktor.http.*
 import io.ktor.server.application.*

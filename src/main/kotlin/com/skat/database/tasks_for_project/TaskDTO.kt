@@ -1,4 +1,4 @@
-package com.skat.database.tasks
+package com.skat.database.tasks_for_project
 
 @kotlinx.serialization.Serializable
 class TaskDTO(

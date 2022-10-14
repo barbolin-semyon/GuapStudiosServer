@@ -1,10 +1,7 @@
-package com.skat.database.tasks
+package com.skat.database.tasks_for_project
 
-import array
-import com.skat.database.projects.ProjectDTO
 import com.skat.database.projects.Projects
 import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object Tasks : Table("tasks") {

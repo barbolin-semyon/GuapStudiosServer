@@ -1,6 +1,6 @@
 package com.skat.features.projects.tasks
 
-import com.skat.database.tasks.TaskDTO
+import com.skat.database.tasks_for_project.TaskDTO
 
 @kotlinx.serialization.Serializable
 data class ListTasksReceiveModel(
