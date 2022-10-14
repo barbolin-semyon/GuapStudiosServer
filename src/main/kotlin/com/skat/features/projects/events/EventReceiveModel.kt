@@ -2,11 +2,12 @@ package com.skat.features.projects.events
 
 import kotlinx.serialization.Serializable
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class EventReceiveModel(
-    val adminId: String,
     val title: String,
     val description: String,
+    val date: String,
+    val observers: Array<String>
 )
 
 @Serializable
