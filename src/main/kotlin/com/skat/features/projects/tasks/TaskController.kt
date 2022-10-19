@@ -11,7 +11,7 @@ import io.ktor.server.response.*
 
 object TaskController {
 
-    private fun getTasksFromDB(indecies: List<String>): ListTaskResponceModel {
+    private fun getTasksFromDB(indecies: List<String>): ListResponceModel<TaskDTO> {
 
         val responseTasks = mutableListOf<TaskDTO>()
         val failTasksIndex = mutableListOf<String>()
@@ -26,12 +26,12 @@ object TaskController {
             }
         }
 
-        return ListTaskResponceModel(responseTasks, failTasksIndex)
+        return ListResponceModel(responseTasks, failTasksIndex)
     }
 
     suspend fun getTasks(call: ApplicationCall) {
-        val receive = call.receive(ListTasksReceiveModel::class)
-        val result = getTasksFromDB(receive.tasks)
+        val receive = call.receive(ListStringReceiveModel::class)
+        val result = getTasksFromDB(receive.ides)
         call.respond(HttpStatusCode.OK, result)
     }
 

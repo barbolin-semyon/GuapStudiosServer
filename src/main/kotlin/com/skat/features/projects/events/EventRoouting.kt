@@ -11,7 +11,7 @@ fun Application.EventRouting() {
         }
 
         get("/project/event/get") {
-            EventController.fetchEvent(call)
+            EventController.getEvents(call)
             return@get
         }
 

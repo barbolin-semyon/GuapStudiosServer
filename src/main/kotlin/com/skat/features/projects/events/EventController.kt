@@ -2,8 +2,9 @@ package com.skat.features.projects.events
 
 import com.skat.database.event_for_project.EventDTO
 import com.skat.database.event_for_project.Events
-import com.skat.database.projects.ProjectDTO
 import com.skat.database.projects.Projects
+import com.skat.features.projects.tasks.ListResponceModel
+import com.skat.features.projects.tasks.ListStringReceiveModel
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -48,19 +49,28 @@ object EventController {
         }
     }
 
-    suspend fun fetchEvent(call: ApplicationCall) {
-        val id = call.parameters["id"]
+    private fun getEventFromDB(indecies: List<String>): ListResponceModel<EventDTO> {
 
-        if (id == null) {
-            call.respond(HttpStatusCode.BadRequest, "there isn't parametr get")
-        } else {
-            val event = Events.fetch(id)
+        val responseEvent = mutableListOf<EventDTO>()
+        val failElementIndex = mutableListOf<String>()
 
-            if (event == null) {
-                call.respond(HttpStatusCode.BadRequest, "not found project")
+        for (index in indecies) {
+            val tempEvent = Events.fetch(index)
+
+            if (tempEvent != null) {
+                responseEvent.add(tempEvent)
             } else {
-                call.respond(HttpStatusCode.OK, event)
+                failElementIndex.add(index)
             }
         }
+
+        return ListResponceModel(responseEvent, failElementIndex)
     }
+
+    suspend fun getEvents(call: ApplicationCall) {
+        val receive = call.receive(ListStringReceiveModel::class)
+        val result = getEventFromDB(receive.ides)
+        call.respond(HttpStatusCode.OK, result)
+    }
+
 }

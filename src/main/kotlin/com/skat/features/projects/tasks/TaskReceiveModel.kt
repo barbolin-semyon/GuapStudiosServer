@@ -3,8 +3,8 @@ package com.skat.features.projects.tasks
 import com.skat.database.tasks_for_project.TaskDTO
 
 @kotlinx.serialization.Serializable
-data class ListTasksReceiveModel(
-    val tasks: List<String>
+data class ListStringReceiveModel(
+    val ides: List<String>
 )
 
 @kotlinx.serialization.Serializable
@@ -26,7 +26,7 @@ data class UpdateTaskReceiveModel(
 )
 
 @kotlinx.serialization.Serializable
-data class ListTaskResponceModel(
-    val tasks: List<TaskDTO>,
+data class ListResponceModel<T>(
+    val tasks: List<T>,
     val failTasksIndex: List<String>
 )
