@@ -12,9 +12,9 @@ fun Application.ProjectRouting() {
             return@post
         }
 
-        get("/project/get") {
+        post("/project/get") {
             ProjectController.getProjects(call)
-            return@get
+            return@post
         }
 
         post("project/update") {
