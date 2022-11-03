@@ -1,7 +1,6 @@
 package com.skat.database.studious
 
 import array
-import com.skat.features.projects.ProjectUpdateReceiveModel
 import com.skat.features.studious.StudioUpdateReceiveModel
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -15,7 +14,7 @@ object Studious : Table("studious") {
     fun insert(studiousDTO: StudiousDTO) {
         transaction {
             Studious.insert {
-                it[name] = studiousDTO.name
+                it[name] = studiousDTO.id
                 it[users] = studiousDTO.users
                 it[tech_task] = studiousDTO.tech_task
                 it[projects] = studiousDTO.projects
@@ -33,11 +32,11 @@ object Studious : Table("studious") {
                 }
 
                 if (updateModel.project != null) {
-                    it[users] = updateModel.project
+                    it[projects] = updateModel.project
                 }
 
                 if (updateModel.tech_task != null) {
-                    it[users] = updateModel.tech_task
+                    it[tech_task] = updateModel.tech_task
                 }
             }
         }
@@ -50,7 +49,7 @@ object Studious : Table("studious") {
 
 
                 StudiousDTO(
-                    name = model[Studious.name],
+                    id = model[Studious.name],
                     projects = model[projects],
                     users = model[users],
                     tech_task = model[tech_task],
