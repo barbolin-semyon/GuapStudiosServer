@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProjectReceiveModel(
+    val studio: String,
     val adminId: String,
     val title: String,
     val description: String,
