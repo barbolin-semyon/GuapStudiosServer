@@ -13,7 +13,7 @@ fun Application.ProjectRouting() {
         }
 
         get("/project/get") {
-            ProjectController.fetchProject(call)
+            ProjectController.getProjects(call)
             return@get
         }
 
