@@ -46,6 +46,8 @@ object ProjectController {
     ) {
         val receiveModel = call.receive(ProjectUpdateReceiveModel::class)
         Projects.updateProject(receiveModel)
+
+        call.respond(HttpStatusCode.OK, "OK")
     }
 
     suspend fun deleteProject(call: ApplicationCall) {
