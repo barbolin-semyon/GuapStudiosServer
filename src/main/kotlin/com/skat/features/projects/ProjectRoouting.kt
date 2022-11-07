@@ -22,9 +22,9 @@ fun Application.ProjectRouting() {
             return@post
         }
 
-        get("/project/delete") {
+        post("/project/delete") {
             ProjectController.deleteProject(call)
-            return@get
+            return@post
         }
     }
 }

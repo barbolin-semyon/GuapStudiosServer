@@ -32,13 +32,17 @@ object ProjectController {
 
         val projects = Studious.fetchStudio(receiveModel.studio)!!.projects.toMutableList()
         projects.add(id)
-        Studious.updateStudio(StudioUpdateReceiveModel(
-            name = receiveModel.studio,
-            project = projects.toTypedArray()
-        ))
+        Studious.updateStudio(
+            StudioUpdateReceiveModel(
+                name = receiveModel.studio,
+                project = projects.toTypedArray()
+            )
+        )
 
         val project = Projects.fetchProject(id)
-        if (project != null) { call.respond(HttpStatusCode.OK, id)}
+        if (project != null) {
+            call.respond(HttpStatusCode.OK, id)
+        }
     }
 
     suspend fun updateProject(
@@ -51,12 +55,24 @@ object ProjectController {
     }
 
     suspend fun deleteProject(call: ApplicationCall) {
-        val id = call.parameters["id"]
+        val receive = call.receive(ProjectDeleteReceiveModel::class)
 
-        if (id == null) {
+        val project = Projects.fetchProject(receive.id)
+
+        if (project == null) {
             call.respond(HttpStatusCode.BadRequest, "there isn't parameter id")
         } else {
-            Projects.deleteProject(id)
+            Projects.deleteProject(receive.id)
+
+            val listProjectsInStudious = Studious.fetchStudio(receive.studioId)?.projects.orEmpty().toMutableList()
+            listProjectsInStudious.remove(receive.id)
+            Studious.updateStudio(
+                StudioUpdateReceiveModel(
+                    name = receive.studioId,
+                    project = listProjectsInStudious.toTypedArray()
+                )
+            )
+
             call.respond(HttpStatusCode.OK, "OK")
         }
     }

@@ -20,3 +20,9 @@ data class ProjectUpdateReceiveModel(
     val events: Array<String>? = null,
     val users: Array<String>? = null,
 )
+
+@Serializable
+data class ProjectDeleteReceiveModel(
+    val id: String,
+    val studioId: String
+)
