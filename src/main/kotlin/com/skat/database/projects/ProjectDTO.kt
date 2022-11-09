@@ -7,6 +7,7 @@ import java.util.UUID
 class ProjectDTO(
     val adminId: String,
     val id: String,
+    val studio: String,
     val title: String,
     val description: String,
     val tasks: Array<String> = arrayOf(),

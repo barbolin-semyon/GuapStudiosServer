@@ -24,6 +24,7 @@ object ProjectController {
 
             ProjectDTO(
                 id = id,
+                studio = receiveModel.studio,
                 adminId = receiveModel.adminId,
                 title = receiveModel.title,
                 description = receiveModel.description,
@@ -41,7 +42,7 @@ object ProjectController {
 
         val project = Projects.fetchProject(id)
         if (project != null) {
-            call.respond(HttpStatusCode.OK, id)
+            call.respond(StringResponceModel(id))
         }
     }
 

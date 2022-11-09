@@ -8,6 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 object Projects : Table("project") {
     private val id = Projects.varchar("id", 50)
+    private val studio = Projects.varchar("id", 50)
     private val adminId = Projects.varchar("adminId", 25)
     private val title = Projects.varchar("title", 25)
     private val description = Projects.varchar("description", 90)
@@ -19,6 +20,7 @@ object Projects : Table("project") {
         transaction {
             Projects.insert {
                 it[id] = projectDTO.id
+                it[studio] = projectDTO.studio
                 it[adminId] = projectDTO.adminId!!
                 it[title] = projectDTO.title!!
                 it[description] = projectDTO.description!!
@@ -75,6 +77,7 @@ object Projects : Table("project") {
 
                 ProjectDTO(
                     id = model[Projects.id],
+                    studio = model[Projects.studio],
                     adminId = model[adminId],
                     title = model[title],
                     description = model[description],
