@@ -26,3 +26,8 @@ data class ProjectDeleteReceiveModel(
     val id: String,
     val studioId: String
 )
+
+@Serializable
+data class StringResponceModel(
+    val message: String
+)
