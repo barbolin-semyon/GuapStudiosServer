@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 object Projects : Table("project") {
     private val id = Projects.varchar("id", 50)
-    private val studio = Projects.varchar("id", 50)
+    private val studio = Projects.varchar("studio", 50)
     private val adminId = Projects.varchar("adminId", 25)
     private val title = Projects.varchar("title", 25)
     private val description = Projects.varchar("description", 90)
