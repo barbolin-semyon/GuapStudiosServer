@@ -1,7 +1,5 @@
 package com.skat.features.projects
 
-import com.skat.database.event_for_project.EventDTO
-import com.skat.database.event_for_project.Events
 import com.skat.database.projects.ProjectDTO
 import com.skat.database.projects.Projects
 import com.skat.database.studious.Studious
@@ -35,8 +33,8 @@ object ProjectController {
         projects.add(id)
         Studious.updateStudio(
             StudioUpdateReceiveModel(
-                name = receiveModel.studio,
-                project = projects.toTypedArray()
+                id = receiveModel.studio,
+                projects = projects.toTypedArray()
             )
         )
 
@@ -69,8 +67,8 @@ object ProjectController {
             listProjectsInStudious.remove(receive.id)
             Studious.updateStudio(
                 StudioUpdateReceiveModel(
-                    name = receive.studioId,
-                    project = listProjectsInStudious.toTypedArray()
+                    id = receive.studioId,
+                    projects = listProjectsInStudious.toTypedArray()
                 )
             )
 

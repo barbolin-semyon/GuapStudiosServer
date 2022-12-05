@@ -26,13 +26,13 @@ object Studious : Table("studious") {
         updateModel: StudioUpdateReceiveModel,
     ) {
         transaction {
-            Studious.update({ Studious.name.eq(updateModel.name) }) {
+            Studious.update({ Studious.name.eq(updateModel.id) }) {
                 if (updateModel.users != null) {
                     it[users] = updateModel.users
                 }
 
-                if (updateModel.project != null) {
-                    it[projects] = updateModel.project
+                if (updateModel.projects != null) {
+                    it[projects] = updateModel.projects
                 }
 
                 if (updateModel.tech_task != null) {

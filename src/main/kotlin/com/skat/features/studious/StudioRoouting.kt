@@ -17,7 +17,7 @@ fun Application.StudiousRouting() {
             return@get
         }
 
-        post("project/update") {
+        post("/studios/update") {
             StudiousController.updateStudio(call)
             return@post
         }

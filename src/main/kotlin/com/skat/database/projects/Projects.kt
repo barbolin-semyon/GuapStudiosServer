@@ -71,6 +71,7 @@ object Projects : Table("project") {
     }
     fun fetchProject(id: String): ProjectDTO? {
         return try {
+
             transaction {
                 val model = Projects.select { Projects.id.eq(id) }.single()
 
