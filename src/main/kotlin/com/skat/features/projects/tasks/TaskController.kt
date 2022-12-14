@@ -52,7 +52,7 @@ object TaskController {
             Tasks.insert(
                 TaskDTO(
                     id = id,
-                    title = receive.description,
+                    title = receive.title,
                     description = receive.description,
                     isCheck = false,
                     user = receive.user,
