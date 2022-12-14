@@ -10,7 +10,11 @@ data class ListStringReceiveModel(
 @kotlinx.serialization.Serializable
 data class CreateTaskReceiveModel(
     val projectId: String,
-    val task: TaskDTO
+    val title: String,
+    val description: String,
+    val user: String,
+    val color: String,
+    val mark: String,
 )
 
 @kotlinx.serialization.Serializable

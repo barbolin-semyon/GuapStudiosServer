@@ -15,7 +15,7 @@ fun Application.TaskRooting() {
             return@post
         }
 
-        post("project/tasks/") {
+        post("project/tasks/delete") {
             TaskController.deleteTask(call)
             return@post
         }

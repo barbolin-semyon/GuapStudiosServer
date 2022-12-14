@@ -8,6 +8,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
+import java.util.*
 
 object TaskController {
 
@@ -43,10 +44,22 @@ object TaskController {
         if (project == null) {
             call.respond(HttpStatusCode.BadRequest, "Project not found")
         } else {
-            val tasks = project.tasks.toMutableList()
-            tasks.add(receive.task.id)
+            val id = UUID.randomUUID().toString()
 
-            Tasks.insert(receive.task)
+            val tasks = project.tasks.toMutableList()
+            tasks.add(id)
+
+            Tasks.insert(
+                TaskDTO(
+                    id = id,
+                    title = receive.description,
+                    description = receive.description,
+                    isCheck = false,
+                    user = receive.user,
+                    color = receive.color,
+                    mark = receive.mark
+                )
+            )
             Projects.updateProject(
                 ProjectUpdateReceiveModel(
                     id = receive.projectId,

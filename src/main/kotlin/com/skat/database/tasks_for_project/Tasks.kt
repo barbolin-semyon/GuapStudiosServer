@@ -10,8 +10,8 @@ object Tasks : Table("tasks") {
     val description = Tasks.varchar("description", 70)
     val isCheck = Tasks.bool("isCheck")
     val user = Tasks.varchar("user", 50)
-    val color = Tasks.varchar("id", 25)
-    val mark = Tasks.varchar("id", 25)
+    val color = Tasks.varchar("color", 25)
+    val mark = Tasks.varchar("mark", 25)
 
     fun insert(tasks: TaskDTO) {
         transaction {
