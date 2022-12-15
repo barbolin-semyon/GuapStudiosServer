@@ -21,20 +21,19 @@ object TechTasksController {
 
     suspend fun addTechStudio(call: ApplicationCall) {
         val receiveModel = call.receive(TechTasksDTO::class)
-        val id = UUID.randomUUID().toString()
 
         TechTasks.insert(receiveModel)
 
         val techTasks = Studious.fetchStudio(receiveModel.studio)!!.tech_task.toMutableList()
-        techTasks.add(id)
+        techTasks.add(receiveModel.id)
         Studious.updateStudio(
             StudioUpdateReceiveModel(
                 id = receiveModel.studio,
-                projects = techTasks.toTypedArray()
+                tech_task = techTasks.toTypedArray()
             )
         )
 
-        call.respond(StringResponceModel(id))
+        call.respond(StringResponceModel(receiveModel.id))
     }
 
     suspend fun deleteTechTasks(call: ApplicationCall) {
