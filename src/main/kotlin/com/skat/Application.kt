@@ -5,6 +5,7 @@ import com.skat.features.projects.ProjectRouting
 import com.skat.features.projects.events.EventRouting
 import com.skat.features.projects.tasks.TaskRooting
 import com.skat.features.studious.StudiousRouting
+import com.skat.features.tech_tasks.TechTaskRooting
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.skat.plugins.*
@@ -22,5 +23,6 @@ fun main() {
         StudiousRouting()
         TaskRooting()
         EventRouting()
+        TechTaskRooting()
     }.start(wait = true)
 }
