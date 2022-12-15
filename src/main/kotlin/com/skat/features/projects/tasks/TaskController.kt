@@ -4,6 +4,7 @@ import com.skat.database.projects.Projects
 import com.skat.database.tasks_for_project.TaskDTO
 import com.skat.database.tasks_for_project.Tasks
 import com.skat.features.projects.ProjectUpdateReceiveModel
+import com.skat.features.projects.StringResponceModel
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -42,7 +43,7 @@ object TaskController {
         val project = Projects.fetchProject(receive.projectId)
 
         if (project == null) {
-            call.respond(HttpStatusCode.BadRequest, "Project not found")
+            call.respond(HttpStatusCode.BadRequest, StringResponceModel("Project not found"))
         } else {
             val id = UUID.randomUUID().toString()
 
@@ -66,7 +67,7 @@ object TaskController {
                     tasks = tasks.toTypedArray()
                 )
             )
-            call.respond(HttpStatusCode.OK, "OK")
+            call.respond(HttpStatusCode.OK, StringResponceModel("OK"))
         }
     }
 
@@ -76,7 +77,7 @@ object TaskController {
         val project = Projects.fetchProject(receive.projectId)
 
         if (project == null) {
-            call.respond(HttpStatusCode.BadRequest, "Project not found")
+            call.respond(HttpStatusCode.BadRequest, StringResponceModel("Project not found"))
         } else {
             val tasks = project.tasks.toMutableList()
             tasks.remove(receive.taskId)
@@ -100,9 +101,9 @@ object TaskController {
         receive.apply {
             if (id != null && isCheck != null) {
                 Tasks.updateIsCheck(id, isCheck)
-                call.respond(HttpStatusCode.OK, "OK")
+                call.respond(HttpStatusCode.OK, StringResponceModel("OK"))
             } else {
-                call.respond(HttpStatusCode.BadRequest, "Not found id or isCheck")
+                call.respond(HttpStatusCode.BadRequest, StringResponceModel("Not found id or isCheck"))
             }
         }
 
