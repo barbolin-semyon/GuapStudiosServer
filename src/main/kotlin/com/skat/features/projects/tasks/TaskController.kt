@@ -90,7 +90,7 @@ object TaskController {
                 )
             )
 
-            call.respond(HttpStatusCode.OK, "OK")
+            call.respond(HttpStatusCode.OK, StringResponceModel("OK"))
         }
 
     }
