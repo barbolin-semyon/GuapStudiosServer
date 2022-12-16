@@ -2,11 +2,8 @@ package com.skat.database.tech_task
 
 import com.skat.database.projects.ProjectDTO
 import com.skat.database.projects.Projects
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.math.cos
 
@@ -36,6 +33,18 @@ object TechTasks : Table("tech_task") {
                 it[place] = techTasksDTO.place
                 it[date] = techTasksDTO.date
             }
+        }
+    }
+
+    fun updateExecutor(techTaskUpdateExecutor: TechTaskUpdateExecutor) {
+        TechTasks.update( {TechTasks.idm.eq(techTaskUpdateExecutor.id) }) {
+            it[executor] = techTaskUpdateExecutor.executor
+        }
+    }
+
+    fun updateIsTake(techTaskUpdateIsTake: TechTaskUpdateIsTake) {
+        TechTasks.update( {TechTasks.idm.eq(techTaskUpdateIsTake.id) }) {
+            it[isTake] = techTaskUpdateIsTake.isTake
         }
     }
 

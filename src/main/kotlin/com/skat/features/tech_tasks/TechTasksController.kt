@@ -3,6 +3,8 @@ package com.skat.features.tech_tasks
 import com.skat.database.projects.ProjectDTO
 import com.skat.database.projects.Projects
 import com.skat.database.studious.Studious
+import com.skat.database.tech_task.TechTaskUpdateExecutor
+import com.skat.database.tech_task.TechTaskUpdateIsTake
 import com.skat.database.tech_task.TechTasks
 import com.skat.database.tech_task.TechTasksDTO
 import com.skat.features.projects.ProjectDeleteReceiveModel
@@ -34,6 +36,11 @@ object TechTasksController {
         )
 
         call.respond(StringResponceModel(receiveModel.id))
+    }
+
+    suspend fun updateCostumer(call: ApplicationCall) {
+        val receiveModel = call.receive(TechTaskUpdateExecutor::class)
+        TechTasks.updateExecutor(receiveModel)
     }
 
     suspend fun deleteTechTasks(call: ApplicationCall) {
