@@ -20,12 +20,14 @@ object TechTasks : Table("tech_task") {
     private val isTake = TechTasks.bool("isTake")
     private val place = TechTasks.varchar("place", 30)
     private val date = TechTasks.varchar("date", 30)
+    private val executor = TechTasks.varchar("executor", 50)
 
     fun insert(techTasksDTO: TechTasksDTO) {
         transaction {
             TechTasks.insert {
                 it[studio] = techTasksDTO.studio
                 it[costumer] = techTasksDTO.costumer
+                it[executor] = techTasksDTO.executor
                 it[title] = techTasksDTO.title
                 it[idm] = techTasksDTO.id
                 it[description] = techTasksDTO.description
@@ -54,6 +56,7 @@ object TechTasks : Table("tech_task") {
                 TechTasksDTO(
                     id = model[idm],
                     costumer = model[costumer],
+                    executor = model[executor],
                     title = model[title],
                     studio = model[studio],
                     description = model[description],

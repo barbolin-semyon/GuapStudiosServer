@@ -5,6 +5,7 @@ import java.util.UUID
 @kotlinx.serialization.Serializable
 data class TechTasksDTO(
     val costumer: String,
+    val executor: String,
     val id: String = UUID.randomUUID().toString(),
     val studio: String,
     val title: String,
