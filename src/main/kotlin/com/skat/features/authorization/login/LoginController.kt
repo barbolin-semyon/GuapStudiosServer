@@ -53,6 +53,8 @@ object LoginController {
         val receive = call.receive(UpdateAdminModel::class)
 
         Users.update(receive)
+
+
     }
 
     suspend fun performToken(call: ApplicationCall) {
