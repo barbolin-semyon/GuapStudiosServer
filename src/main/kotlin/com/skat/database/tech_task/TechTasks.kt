@@ -15,7 +15,7 @@ object TechTasks : Table("tech_task") {
     private val idm = TechTasks.varchar("id", 50)
     private val studio = TechTasks.varchar("studio", 25)
     private val title = TechTasks.varchar("title", 25)
-    private val description = TechTasks.varchar("description", 25)
+    private val description = TechTasks.varchar("description", 200)
     private val countPeople = TechTasks.integer("countPeople")
     private val isTake = TechTasks.bool("isTake")
     private val place = TechTasks.varchar("place", 30)
