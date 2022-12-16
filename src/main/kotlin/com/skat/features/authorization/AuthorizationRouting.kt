@@ -12,6 +12,16 @@ fun Application.AuthorizationRooting() {
             return@post
         }
 
+        get("/user") {
+            LoginController.getUser(call)
+            return@get
+        }
+
+        post("/user/update/admin") {
+            LoginController.updateIsAdminUser(call)
+            return@post
+        }
+
         get("/performToken") {
             LoginController.performToken(call)
             return@get

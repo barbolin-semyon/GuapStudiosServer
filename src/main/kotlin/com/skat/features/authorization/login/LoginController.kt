@@ -4,11 +4,13 @@ import com.skat.database.tokens.TokenDTO
 import com.skat.database.tokens.Tokens
 import com.skat.database.users.UserDTO
 import com.skat.database.users.Users
+import com.skat.features.projects.StringResponceModel
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import java.util.*
+import kotlin.math.log
 
 object LoginController {
     suspend fun performLogin(call: ApplicationCall) {
@@ -28,6 +30,29 @@ object LoginController {
                 call.respond(HttpStatusCode.BadRequest, "Invalid user")
             }
         }
+    }
+
+    suspend fun getUser(call: ApplicationCall) {
+        val login = call.parameters["login"]
+
+        if (login != null) {
+            val user = Users.fetch(login)
+
+            if (user != null) {
+                call.respond(HttpStatusCode.OK, user.hidePassword())
+            } else {
+                call.respond(HttpStatusCode.BadRequest, StringResponceModel("Login is not valid"))
+            }
+
+        } else {
+            call.respond(HttpStatusCode.BadRequest, StringResponceModel("There isn't parameter login"))
+        }
+    }
+
+    suspend fun updateIsAdminUser(call: ApplicationCall) {
+        val receive = call.receive(UpdateAdminModel::class)
+
+        Users.update(receive)
     }
 
     suspend fun performToken(call: ApplicationCall) {

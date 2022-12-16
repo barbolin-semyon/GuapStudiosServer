@@ -9,6 +9,12 @@ data class LoginReceiveModel(
 )
 
 @Serializable
+data class UpdateAdminModel(
+    val login: String,
+    val isAdmin: Boolean
+)
+
+@Serializable
 data class TokenModel(
     val token: String
 )
