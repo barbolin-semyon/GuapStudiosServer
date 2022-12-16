@@ -1,9 +1,13 @@
 package com.skat.database.users
 
+import com.skat.database.projects.Projects
+import com.skat.features.authorization.login.UpdateAdminModel
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 
 object Users: Table("user") {
     private val login = Users.varchar("login", 25)
@@ -25,6 +29,14 @@ object Users: Table("user") {
                 it[score] = userDTO.score
                 it[isAdmin] = userDTO.isAdmin
 
+            }
+        }
+    }
+
+    fun update(updateAdminModel: UpdateAdminModel) {
+        transaction {
+            Users.update({ Users.login.eq(updateAdminModel.login) }) {
+                it[isAdmin] = updateAdminModel.isAdmin
             }
         }
     }
