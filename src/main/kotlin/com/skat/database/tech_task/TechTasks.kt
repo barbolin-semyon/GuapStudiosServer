@@ -37,14 +37,19 @@ object TechTasks : Table("tech_task") {
     }
 
     fun updateExecutor(techTaskUpdateExecutor: TechTaskUpdateExecutor) {
-        TechTasks.update( {TechTasks.idm.eq(techTaskUpdateExecutor.id) }) {
-            it[executor] = techTaskUpdateExecutor.executor
+        transaction {
+            TechTasks.update( {TechTasks.idm.eq(techTaskUpdateExecutor.id) }) {
+                it[executor] = techTaskUpdateExecutor.executor
+            }
         }
+
     }
 
     fun updateIsTake(techTaskUpdateIsTake: TechTaskUpdateIsTake) {
-        TechTasks.update( {TechTasks.idm.eq(techTaskUpdateIsTake.id) }) {
-            it[isTake] = techTaskUpdateIsTake.isTake
+        transaction {
+            TechTasks.update( {TechTasks.idm.eq(techTaskUpdateIsTake.id) }) {
+                it[isTake] = techTaskUpdateIsTake.isTake
+            }
         }
     }
 

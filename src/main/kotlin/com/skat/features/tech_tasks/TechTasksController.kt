@@ -38,9 +38,14 @@ object TechTasksController {
         call.respond(StringResponceModel(receiveModel.id))
     }
 
-    suspend fun updateCostumer(call: ApplicationCall) {
+    suspend fun updateExecutor(call: ApplicationCall) {
         val receiveModel = call.receive(TechTaskUpdateExecutor::class)
         TechTasks.updateExecutor(receiveModel)
+    }
+
+    suspend fun updateIsTake(call: ApplicationCall) {
+        val receiveModel = call.receive(TechTaskUpdateIsTake::class)
+        TechTasks.updateIsTake(receiveModel)
     }
 
     suspend fun deleteTechTasks(call: ApplicationCall) {

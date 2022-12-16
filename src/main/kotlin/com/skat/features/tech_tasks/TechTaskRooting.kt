@@ -13,12 +13,12 @@ fun Application.TechTaskRooting() {
         }
 
         post("/tech_task/update/take") {
-            TechTasksController.addTechStudio(call)
+            TechTasksController.updateExecutor(call)
             return@post
         }
 
         post("/tech_task/update/executor") {
-            TechTasksController.addTechStudio(call)
+            TechTasksController.updateExecutor(call)
             return@post
         }
 
